@@ -222,7 +222,7 @@
 	\label{tab:promenne_popis}
 \end{table}
 
-V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na celém datasetu.
+V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na celém datasetu, v Tabulce~\ref{tab:analyza_muj_dataset} pak analýza podskupiny \texttt{cell}=2.
 
 \begin{table}[H]
 	\centering
@@ -242,31 +242,42 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{tabular}
 	\caption{Základní analýza na celém datasetu} \label{tab:zaklad_anal_cely_dataset}
 \end{table}
+
+\begin{table}[H]
+	\centering
+	\label{tab:analyza_muj_dataset}
+	\begin{tabular}{lrrrrrrrr}
+		\toprule
+		& treat & cell & survt & cens & KAR & didur & age & prith \\
+		\midrule
+		count & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 \\
+		mean & 1.38 & 2.00 & 71.67 & 0.75 & 53.54 & 9.25 & 59.88 & 2.29 \\
+		std & 0.49 & 0.00 & 85.77 & 0.44 & 19.10 & 13.91 & 9.92 & 4.25 \\
+		min & 1.00 & 2.00 & 2.00 & 0.00 & 20.00 & 1.00 & 35.00 & 0.00 \\
+		25\% & 1.00 & 2.00 & 20.00 & 0.75 & 40.00 & 2.00 & 54.75 & 0.00 \\
+		50\% & 1.00 & 2.00 & 51.00 & 1.00 & 60.00 & 4.00 & 62.50 & 0.00 \\
+		75\% & 2.00 & 2.00 & 97.50 & 1.00 & 70.00 & 11.00 & 67.00 & 0.00 \\
+		max & 2.00 & 2.00 & 392.00 & 1.00 & 85.00 & 87.00 & 72.00 & 10.00 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Základní analýza na podvybraném datasetu ($\mbox{\texttt{cell}}=2$)}
+\end{table}
 	
+	Podvybraný dataset obsahuje pouze 48 pozorování, jedná se o pacienty průměrně o něco starší a s výrazně kratší průměrnou dobou dožití.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.999\linewidth]{img/boxplot_drug_vs_placebo_BOTH}
+		\caption[Boxplot doby dožití]{Boxplot doby dožití}
+		\label{fig:boxplotdrugvsplacebo}
+	\end{figure}
 	
 	\subsection{Základní analýza}
 	\commm{TODO: popis o co jde, tabulka describe celeho datasetu a mych dat} 
 	Cílem je zjistit, jak dané léčivo ovlivnilo dobu dožití pacientů v porovnání s placebem. 
 
+	
 
-\begin{table}[H]
-	\centering
-\begin{tabular}{lrrrrrrrr}
-	\toprule
-	& treat & cell & survt & cens & KAR & didur & age & prith \\
-	\midrule
-	count & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 \\
-	mean & 1.38 & 2.00 & 71.67 & 0.75 & 53.54 & 9.25 & 59.88 & 2.29 \\
-	std & 0.49 & 0.00 & 85.77 & 0.44 & 19.10 & 13.91 & 9.92 & 4.25 \\
-	min & 1.00 & 2.00 & 2.00 & 0.00 & 20.00 & 1.00 & 35.00 & 0.00 \\
-	25\% & 1.00 & 2.00 & 20.00 & 0.75 & 40.00 & 2.00 & 54.75 & 0.00 \\
-	50\% & 1.00 & 2.00 & 51.00 & 1.00 & 60.00 & 4.00 & 62.50 & 0.00 \\
-	75\% & 2.00 & 2.00 & 97.50 & 1.00 & 70.00 & 11.00 & 67.00 & 0.00 \\
-	max & 2.00 & 2.00 & 392.00 & 1.00 & 85.00 & 87.00 & 72.00 & 10.00 \\
-	\bottomrule
-\end{tabular}
-	\caption{Základní analýza na podvybraném datasetu ($\mbox{\texttt{cell}}=2$)}
-\end{table}
 
 
 	
