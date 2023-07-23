@@ -196,6 +196,8 @@
 	\noindent
 	\textbf{Skupina II.:}  treat=1(standard) versus treat=2(placebo) pro cell=2(small) \\
 	
+	\newpage
+	
 	\section{Dataset}\label{sec:dataset}
 	Poskytnutý dataset představuje záznam testování vlivu jistého léčiva na dobu přežití pacienta. Data se skládají ze 137 pozorování 8 proměnných, viz Tabulka~\ref{tab:promenne_popis}. Cílem je modelovat dobu dožití (\textit{survival time}), tedy \texttt{survt} je vysvětlovaná proměnná.
 	Ta je censorována podle proměnné \texttt{cens}. Další proměnné, které jsou k dispozici, představují věk pacienta, typ buněk, Karnofsky score (představující závažnost nemoci\footnote{Pozn: Hodnoty Karnofského skóre znamenají: $ KAR\leq30 $ -- úplná hospitalizace, $30<KAR\leq60$ -- částečná hospitalizace, $ KAR>60 $ -- vlastní péče bez hospitalizace.}), trvání nemoci (proměnná \texttt{didur}) a zda pacient už absolvoval léčbu v minulosti. 
