@@ -7,3 +7,5 @@ protokol/SKE_assignment_Gaj.synctex.gz
 protokol/SKE_assignment_Gaj.toc
 *.xml
 *.iml
+*.synctex(busy)
+*.aux

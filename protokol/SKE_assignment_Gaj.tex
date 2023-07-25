@@ -265,7 +265,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\caption{Základní analýza na podvybraném datasetu ($\mbox{\texttt{cell}}=2$)}
 \end{table}
 	
-	Podvybraný dataset obsahuje pouze 48 pozorování, jedná se o pacienty průměrně o něco starší a s výrazně kratší průměrnou dobou dožití.
+	Podvybraný dataset obsahuje pouze 48 pozorování, jedná se o pacienty průměrně o něco starší a s výrazně kratší průměrnou dobou dožití. Dataset je rozdělen nerovnoměrně: 30 pacientů z 48 bylo léčeno skutečným lékem, a jen 18 z 48 placebem. 
 	
 	\begin{figure}[H]
 		\centering
@@ -273,6 +273,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\caption[Boxplot doby dožití]{Boxplot doby dožití}
 		\label{fig:boxplotdrugvsplacebo}
 	\end{figure}
+
+	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení dat v j
 	
 	\subsection{Základní analýza}
 	\commm{TODO: popis o co jde, tabulka describe celeho datasetu a mych dat} 
@@ -286,12 +288,12 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\subsection{Vizualizace}
 	\commm{TODO: histogram, boxplot}
 	
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{img/boxplot_drug_vs_placebo}
-	\caption[Boxplot doby dožití]{Boxplot doby dožití}
-	\label{fig:boxplotdrugvsplacebo}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.7\linewidth]{img/boxplot_drug_vs_placebo}
+%	\caption[Boxplot doby dožití]{Boxplot doby dožití}
+%	\label{fig:boxplotdrugvsplacebo}
+%\end{figure}
 
 
 
@@ -333,7 +335,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\centering
 		\includegraphics[width=0.9\linewidth]{img/fiteverything_placebo_PP_plots.png}
 		\caption{PP ploty pro jednotlivé fity}
-		\label{fig:fiteverything_placebo_PP_plots}
+		\label{fig:fit_everything_placebo_PP_plots}
 	\end{figure}
 	
 	\subsection{Neparametrické modely}
@@ -345,6 +347,15 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	\section{Porovnání podskupin lék vs. placebo} \label{sec:comparison_drug_vs_placebo}
 	aaaaa
+	
+	V této sekci uvedem porovnání modelů, sestavených v předchozích sekcích. Konkrétně tedy budeme porovnávat 
+	\begin{itemize}
+		\item a
+		\item b
+	\end{itemize}
+
+	
+	
 	
 	\section{Coxův regresní model} \label{sec:cox_model}
 	\textit{Coxův regresní model} je založen na Coxově proporcionálním hazardovém předpokladu, který říká, že poměrné riziko dvou jedinců je konstantní v čase. Tento předpoklad umožňuje odhadnout vliv různých faktorů na přežití a současně zachovává nezávislost na neovlivňujících proměnných.
