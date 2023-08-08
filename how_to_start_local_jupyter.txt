@@ -1,0 +1,21 @@
+
+run this in venv console in pycharm :
+
+PS C:\Users\lenov\Documents\GitHub\ske_assignment> .\venv_ske\Scripts\jupyter-lab
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
