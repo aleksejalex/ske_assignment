@@ -364,6 +364,13 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\caption{Four men placebo}
 		\label{fig:four_men_placebo}
 	\end{figure}
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/four_men_placebo_compared_to_parametrics.png}
+	\caption{Four men placebo compared to parametrics}
+	\label{fig:four_men_placebo}
+\end{figure}
 	
 	
 	\section{Porovnání podskupin lék vs. placebo} \label{sec:comparison_drug_vs_placebo}
@@ -377,18 +384,30 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 
 	
 	
-	
+	\newpage
 	\section{Coxův regresní model} \label{sec:cox_model}
 	\textit{Coxův regresní model} je založen na Coxově proporcionálním hazardovém předpokladu, který říká, že poměrné riziko dvou jedinců je konstantní v čase. Tento předpoklad umožňuje odhadnout vliv různých faktorů na přežití a současně zachovává nezávislost na neovlivňujících proměnných.
 	
 	Pro použití Coxova regresního modelu je nejprve potřeba mít k dispozici data o čase do události (např. úmrtí) a příslušné prediktory (faktory ovlivňující přežití). Zde byla použita existující implementace Coxova regresního modelu v knihovně \texttt{lifelines}.
 	
 	\subsection{Ověření předpokladů}
+	
+	 - text na logrank test
+	 
+	 - pic
+	 
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=0.9\linewidth]{img/loglogplot_KM.png}
+	 	\caption{log-log plot lék vs placebo}
+	 	\label{fig:loglogplot_drug_vs_placebo}
+	 \end{figure}
+	
 
 	\subsection{Model}
 	
-	
+	\newpage
 	\section{Závěr}\label{sec:zaver}
-	We co
+	tba tba
 
 \end{document}
