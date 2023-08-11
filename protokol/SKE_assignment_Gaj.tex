@@ -318,7 +318,10 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:parametric_placebo}
-	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou obě skupiny pacientů (léčení lékem a léčení placebem) 
+	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou pro obě skupiny pacientů (tj. léčení lékem a léčení placebem) uvedeny odhady Kaplan-Meiera a Nelson-Aalena.
+	Na grafech jsou pro porovnání vyneseny také vybrané parametrické odhady (viz výše).
+	
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/fiteverything_placebo_histogram.png}
@@ -344,6 +347,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\caption{Four men drugs}
 		\label{fig:four_men_drugs}
 	\end{figure}
+
+	Na ose x je vynesen počet dnů do hodnoty 400, jelikož maximální hodnota \texttt{survt} pro pacienty léčené lékem je 392.
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:non_parametric_placebo}
 	
@@ -360,6 +365,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\caption{Four men placebo compared to parametrics}
 	\label{fig:four_men_placebo}
 \end{figure}
+	
+	Zde je počet dnů vynesen pouze do hodnoty 110, jelikož maximální hodnota \texttt{survt} pro pacienty léčené placebem je 103.
 	
 	
 	\section{Porovnání podskupin lék vs. placebo} \label{sec:comparison_drug_vs_placebo}
@@ -380,14 +387,13 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	Pro použití Coxova regresního modelu je nejprve potřeba mít k dispozici data o čase do události (např. úmrtí) a příslušné prediktory (faktory ovlivňující přežití). Zde byla použita existující implementace Coxova regresního modelu v knihovně \texttt{lifelines}.
 	
 	\subsection{Ověření předpokladů}
-	
-	 - text na logrank test
+	Začněme vizuální kontrolou přůběhů log-log $ \hat{R}_{KM} $ 
 	 
-	 - pic
+	Obrázek~\ref{fig:loglogplot_drug_vs_placebo} představuje tzv. log-log plot. Je vidět, že grafy nejsou \uvoz{rovnoběžné}, na několika místech se kříží. 
 	 
 	 \begin{figure}[H]
 	 	\centering
-	 	\includegraphics[width=0.9\linewidth]{img/loglogplot_KM.png}
+	 	\includegraphics[width=0.6\linewidth]{img/loglogplot_KM.png}
 	 	\caption{log-log plot lék vs placebo}
 	 	\label{fig:loglogplot_drug_vs_placebo}
 	 \end{figure}
