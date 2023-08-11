@@ -280,30 +280,18 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\commm{TODO: popis o co jde, tabulka describe celeho datasetu a mych dat} 
 	Cílem je zjistit, jak dané léčivo ovlivnilo dobu dožití pacientů v porovnání s placebem. 
 
-	
-
-
 
 	
 	\subsection{Vizualizace}
 	\commm{TODO: histogram, boxplot}
-	
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.7\linewidth]{img/boxplot_drug_vs_placebo}
-%	\caption[Boxplot doby dožití]{Boxplot doby dožití}
-%	\label{fig:boxplotdrugvsplacebo}
-%\end{figure}
-
-
-
 
 
 	\section{Parametrické a neparametrické modely}
 	Nyní se pokusíme najít nejlepší modely pro popis dat, tedy vytvoříme pro každou skupinu pacientů vlastní model. Použijeme k tomu existující implementaci v knihovně \texttt{reliability}.
 	
 	\subsection{Parametrické modely}
-	V Podsekcích~\ref{sec:parametric_drugs},~\ref{sec:parametric_placebo},~\ref{sec:non_parametric_drugs},~\ref{sec:non_parametric_placebo}
+	V Podsekcích~\ref{sec:parametric_drugs}~a~\ref{sec:parametric_placebo} jsou pokaždé uvedeny grafické výstupy funkce \texttt{Fit\_Everything} a stručná diskuze, vysvětlující volbu konkrétní hustoty.
+	Funkce \texttt{Fit\_Everything} proloží poskytnutá data pomocí 15 předdefinovaných hustot a pro každou odhadne hodnoty parametrů. Následně vykreslí PP ploty a probabilitz ploty pro každý fit.
 	
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:parametric_drugs}
@@ -330,7 +318,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:parametric_placebo}
-	
+	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou obě skupiny pacientů (léčení lékem a léčení placebem) 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/fiteverything_placebo_histogram.png}
@@ -346,6 +334,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{figure}
 	
 	\subsection{Neparametrické modely}
+	~\ref{sec:non_parametric_drugs},~\ref{sec:non_parametric_placebo}
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:non_parametric_drugs}
 	
