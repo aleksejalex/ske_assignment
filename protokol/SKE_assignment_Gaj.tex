@@ -270,11 +270,14 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.999\linewidth]{img/boxplot_drug_vs_placebo_BOTH}
-		\caption[Boxplot doby dožití]{Boxplot doby dožití}
+		\caption[Boxplot doby dožití]{Boxplot doby dožití (nalevo - celá analyzovaná skupina, uprostřed - pouze pro necensorovaná data, napravo - pouze pro censorovaná data)}
 		\label{fig:boxplotdrugvsplacebo}
 	\end{figure}
 
-	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení dat v j
+	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení pacientů léčených lékem a placebem mezi censorovanými\footnote{V kontextu spolehlivostní analýzy censorované pozorování je neúplné nebo ne zcela pozorované měření. V tomto případě censorovaná pozorování jsou například pacienti, kteří přežili po celou dobu experimentu (a tedy okamžik úmrtí nebyl zaznamenán) nebo ukončili léčbu předčasně. Tedy necensorovaná pozorování představují pacienty, jejichž úmrtí bylo pozorováno před koncem experimentu.} a necensorovanými případy. 
+	Na všech třech boxplotech je vidět, že střední hodnota doby přežití je u pacientů léčených lékem vyšší, než u pacientů léčených placebem. Dokonce mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití.
+	 
+	Mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití. Může se jednat o případy, pro které testovaný lék je obzvláště účinný nebo pouze o přirozenou výjimku. Skutečnost, že taková odlehlá pozorování jsou pouze v případě léku a pouze na jednu stranu od průměru, napovídá k první variantě.
 	
 	\subsection{Základní analýza}
 	\commm{TODO: popis o co jde, tabulka describe celeho datasetu a mych dat} 
