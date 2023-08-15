@@ -59,6 +59,8 @@
 %\usepackage[printwatermark]{xwatermark}
 
 \usepackage{bm}
+\usepackage{adjustbox}
+\usepackage{changepage}   % for \begin{adjustwidth}{-2cm}{} \end{adjustwidth}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% My unique commands in LaTeX
@@ -167,18 +169,18 @@
 	
 	\newpage
 	
-	\begin{postulate}[Jen pro mně: censored vs died]
-		In the context of survival analysis, censored data refers to observations that are incomplete or not fully observed. Censoring occurs when the exact event time (such as death) for a subject is unknown or has not yet occurred at the end of the study or the time of analysis.
-		
-		In your dataset with patients, if the event of interest is whether they have died or not, the "censored" status indicates that the patient's event status is unknown because they were still alive or their follow-up time ended before the event occurred. It means that the patient was observed for a certain period but the event (death) did not occur within that period. Censoring can happen due to various reasons, such as the end of the study, loss to follow-up, or the patient being still alive at the time of analysis.
-		
-		In survival analysis, censored data is an important consideration. Statistical methods, like the Cox proportional hazards model or Kaplan-Meier estimator, handle censored data appropriately and use the available information to estimate survival probabilities and hazard rates.
-		
-		When analyzing your dataset, you would need to take into account both the "died" events and the censored observations to obtain valid estimates of survival probabilities or hazard ratios. The censored observations contribute information about the time the patient was followed until censoring, which is valuable in estimating the survival function beyond the observed events.
-		
-		It's crucial to appropriately handle and interpret censored data in survival analysis to obtain reliable conclusions about the survival experience of patients in your study.
-	\end{postulate}
-\newpage
+%	\begin{postulate}[Jen pro mně: censored vs died]
+%		In the context of survival analysis, censored data refers to observations that are incomplete or not fully observed. Censoring occurs when the exact event time (such as death) for a subject is unknown or has not yet occurred at the end of the study or the time of analysis.
+%		
+%		In your dataset with patients, if the event of interest is whether they have died or not, the "censored" status indicates that the patient's event status is unknown because they were still alive or their follow-up time ended before the event occurred. It means that the patient was observed for a certain period but the event (death) did not occur within that period. Censoring can happen due to various reasons, such as the end of the study, loss to follow-up, or the patient being still alive at the time of analysis.
+%		
+%		In survival analysis, censored data is an important consideration. Statistical methods, like the Cox proportional hazards model or Kaplan-Meier estimator, handle censored data appropriately and use the available information to estimate survival probabilities and hazard rates.
+%		
+%		When analyzing your dataset, you would need to take into account both the "died" events and the censored observations to obtain valid estimates of survival probabilities or hazard ratios. The censored observations contribute information about the time the patient was followed until censoring, which is valuable in estimating the survival function beyond the observed events.
+%		
+%		It's crucial to appropriately handle and interpret censored data in survival analysis to obtain reliable conclusions about the survival experience of patients in your study.
+%	\end{postulate}
+%\newpage
 	
 	\section{Zadání}\label{sec:zadani}
 	\textbf{A)} \textit{Pomocí parametrických a neparametrických metod pro cenzorovaná data odhadněte vhodný spolehlivostní model pro časy dožití (survt Tj) obou vybraných podskupin pacientů. Pro kontrolu fitu parametrické rodiny užijte Kaplan-Meierův plot nebo Nelson-Aalenův ‘hazard plot‘ (nejlépe v jednom obrázku spolu s parametrickým průběhem), resp. QQ/PP při RC.} \\
@@ -247,7 +249,6 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 
 \begin{table}[H]
 	\centering
-	\label{tab:analyza_muj_dataset}
 	\begin{tabular}{lrrrrrrrr}
 		\toprule
 		& treat & cell & survt & cens & KAR & didur & age & prith \\
@@ -263,6 +264,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\bottomrule
 	\end{tabular}
 	\caption{Základní analýza na podvybraném datasetu ($\mbox{\texttt{cell}}=2$)}
+    \label{tab:analyza_muj_dataset}
 \end{table}
 	
 	Podvybraný dataset obsahuje pouze 48 pozorování, jedná se o pacienty průměrně o něco starší a s výrazně kratší průměrnou dobou dožití. Dataset je rozdělen nerovnoměrně: 30 pacientů z 48 bylo léčeno skutečným lékem, a jen 18 z 48 placebem. 
@@ -279,12 +281,6 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	 
 	Mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití. Může se jednat o případy, pro které testovaný lék je obzvláště účinný nebo pouze o přirozenou výjimku. Skutečnost, že taková odlehlá pozorování jsou pouze v případě léku a pouze na jednu stranu od průměru, napovídá k první variantě.
 	
-%	\subsection{Základní analýza}
-%	\commm{TODO: popis o co jde, tabulka describe celeho datasetu a mych dat} 
-%	Cílem je zjistit, jak dané léčivo ovlivnilo dobu dožití pacientů v porovnání s placebem. 
-%
-%	\subsection{Vizualizace}
-	
 	Na Obrázku~\ref{fig:pairplot_my_data} je základní vizualizace datasetu (barevně jsou odděleny podskupiny, tj. lék a placebo).
 	
 	\begin{figure}%[H]
@@ -295,12 +291,13 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{figure}
 	
 
-
 	\section{Parametrické a neparametrické modely}
+    Cílem této práce je určit, zda použití daného léku významně ovlivnilo dobu přežití u pacientů v dané skupině. 
+    Cílem této práce je najít vhodný model popisující určit, zda použití daného léku významně ovlivnilo dobu přežití u pacientů v dané skupině. 
 	Nyní se pokusíme najít nejlepší modely pro popis dat, tedy vytvoříme pro každou skupinu pacientů vlastní model. Nejprve vyzkoušíme pro každou podskupinu parametrický přístup, poté neparametrický a následně výsledné modely porovnáme.
 	
 	
-	\subsection{Parametrické modely}
+	\subsection{Parametrické modely} \label{sec:parametric_all}
 	Ke hledání vhodného parametrického modelu použijeme existující implementaci v knihovně \texttt{reliability}. 
 	V Podsekcích~\ref{sec:parametric_drugs}~a~\ref{sec:parametric_placebo} jsou pokaždé uvedeny grafické výstupy funkce \texttt{Fit\_Everything} a stručná diskuze, vysvětlující volbu konkrétní hustoty.
 	Funkce \texttt{Fit\_Everything} proloží poskytnutá data pomocí 15 předdefinovaných hustot a pro každou odhadne hodnoty parametrů. Následně vykreslí PP ploty a probability ploty pro každý fit.
@@ -317,22 +314,71 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 
 	\begin{figure}[H]
 		\centering
+		\includegraphics[width=0.9\linewidth]{img/fiteverything_drug_P_plots.png}
+		\caption{P ploty pro jednotlivé fity}
+		\label{fig:fit_everything_drug_P_plots}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
 		\includegraphics[width=0.9\linewidth]{img/fiteverything_drug_PP_plots.png}
 		\caption{PP ploty pro jednotlivé fity}
 		\label{fig:fit_everything_drug_PP_plots}
 	\end{figure}
+	
+	V Tabulce~\ref{tab:fitall_output_parameters_tab} jsou shrnuty hodnoty odhadnutých parametrů a také hodnoty \texttt{log-likelihood}, \texttt{AIC} a \texttt{BIC}.
+	
+\begin{table}[H]
+	\tiny
+	\centering
+	\begin{tabular}{@{}|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|@{}}
+		\toprule
+		\textbf{Distribution} &
+		$\alpha$ &
+		$\beta$ &
+		$\gamma$ &
+		$\alpha_1$ &
+		$\beta_1$ &
+		$\alpha_2$ &
+		$\beta_2$ &
+		Prop. 1 &
+		DS &
+		$\mu$ &
+		$\sigma$ &
+		$\lambda$ &
+		\textbf{Log-like.} &
+		\textbf{AIC} &
+		\textbf{BIC} \\ \toprule
+		Gamma3P       & 270.72 & 0.50 & 4.00 &        &      &        &        &      &      &        &        &      & -120.39 & 247.71 & 250.99 \\ \midrule
+		Weibull3P     & 106.13 & 0.61 & 4.00 &        &      &        &        &      &      &        &        &      & -120.93 & 248.79 & 252.07 \\ \midrule
+		WeibullMixt.  &        &      &      & 56.57  & 1.10 & 389.96 & 116.37 & 0.76 &      &        &        &      & -118.04 & 248.57 & 253.08 \\ \midrule
+		Loglogistic3P & 57.80  & 0.78 & 4.00 &        &      &        &        &      &      &        &        &      & -122.66 & 252.25 & 255.53 \\ \midrule
+		WeibullCR     &        &      &      & 128.49 & 0.74 & 390.17 & 120.53 &      &      &        &        &      & -121.13 & 251.86 & 255.86 \\ \midrule
+		Lognormal2P   &        &      &      &        &      &        &        &      &      & 4.13   & 1.39   &      & -124.59 & 253.62 & 255.98 \\ \midrule
+		Exponential1P &        &      &      &        &      &        &        &      &      &        &        & 0.01 & -126.91 & 255.97 & 257.23 \\ \midrule
+		Loglogistic2P & 60.37  & 1.19 &      &        &      &        &        &      &      &        &        &      & -125.30 & 255.04 & 257.39 \\ \midrule
+		Lognormal3P   &        &      & 3.00 &        &      &        &        &      &      & 4.02   & 1.63   &      & -123.98 & 254.87 & 258.15 \\ \midrule
+		Exponential2P &        &      & 4.00 &        &      &        &        &      &      &        &        & 0.01 & -125.87 & 256.18 & 258.54 \\ \midrule
+		Weibull2P     & 114.41 & 0.83 &      &        &      &        &        &      &      &        &        &      & -126.20 & 256.85 & 259.21 \\ \midrule
+		Gamma2P       & 153.69 & 0.80 &      &        &      &        &        &      &      &        &        &      & -126.49 & 257.43 & 259.79 \\ \midrule
+		WeibullDS     & 114.41 & 0.83 &      &        &      &        &        &      & 1.00 &        &        &      & -126.20 & 259.33 & 262.61 \\ \midrule
+		Normal2P      &        &      &      &        &      &        &        &      &      & 112.97 & 119.09 &      & -141.89 & 288.23 & 290.58 \\ \midrule
+		Gumbel2P      &        &      &      &        &      &        &        &      &      & 185.54 & 139.42 &      & -147.79 & 300.02 & 302.38 \\ \bottomrule
+	\end{tabular}
+	\caption{Odhady parametrů pro podskupinu pacientů léčených lékem}
+	\label{tab:fitall_output_parameters_tab}
+	\normalsize
+\end{table}
 
+	Na základě vizuálního vyhodnocení P-plotů a PP-plotů (Obr.~\ref{fig:fit_everything_drug_P_plots} a Obr.~\ref{fig:fit_everything_drug_PP_plots})
 
 	Na Obrázku~\ref{fig:four_men_drugs} je porovnání \commm{ceho?} pro
 	
-	Je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, pokud porovnávame tyto parametrické fity s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena, a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu.
+	Je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, a to i ve srovnání s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena (viz Podsekce~\ref{sec:neparametric_all}), a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu.
 	
 	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:parametric_placebo}
-	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou pro obě skupiny pacientů (tj. léčení lékem a léčení placebem) uvedeny odhady Kaplan-Meiera a Nelson-Aalena.
-	Na grafech jsou pro porovnání vyneseny také vybrané parametrické odhady (viz výše).
-	
 	
 	\begin{figure}[H]
 		\centering
@@ -348,8 +394,9 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\label{fig:fit_everything_placebo_PP_plots}
 	\end{figure}
 	
-	\subsection{Neparametrické modely}
-	~\ref{sec:non_parametric_drugs},~\ref{sec:non_parametric_placebo}
+	\subsection{Neparametrické modely} \label{sec:non_parametric_all}
+	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou pro obě skupiny pacientů (tj. léčení lékem a léčení placebem) uvedeny odhady Kaplan-Meiera a Nelson-Aalena.
+	Na grafech jsou pro porovnání vyneseny také vybrané parametrické odhady (viz výše).
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:non_parametric_drugs}
 	
@@ -394,27 +441,27 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	\newpage
 	\section{Coxův regresní model} \label{sec:cox_model}
-	\textit{Coxův regresní model} je založen na Coxově proporcionálním hazardovém předpokladu, který říká, že poměrné riziko dvou jedinců je konstantní v čase. Tento předpoklad umožňuje odhadnout vliv různých faktorů na přežití a současně zachovává nezávislost na neovlivňujících proměnných.
+	\textit{Coxův regresní model} je založen na Coxově proporcionálním hazardovém předpokladu, který tvrdí, že poměrné riziko dvou skupin je konstantní v čase. Tento předpoklad umožňuje odhadnout vliv různých faktorů na přežití a současně zachovává nezávislost na neovlivňujících proměnných.
 	
 	Pro použití Coxova regresního modelu je nejprve potřeba mít k dispozici data o čase do události (např. úmrtí) a příslušné prediktory (faktory ovlivňující přežití). Zde byla použita existující implementace Coxova regresního modelu v knihovně \texttt{lifelines}.
 	
 	\subsection{Ověření předpokladů}
-	Začněme vizuální kontrolou přůběhů log-log $ \hat{R}_{KM} $ 
+	Začněme vizuální kontrolou průběhů log-log $ \hat{R}_{KM} $ (Obrázek~\ref{fig:loglogplot_drug_vs_placebo}).
 	 
-	Obrázek~\ref{fig:loglogplot_drug_vs_placebo} představuje tzv. log-log plot. Je vidět, že grafy nejsou \uvoz{rovnoběžné}, na několika místech se kříží. 
-	 
-	 \begin{figure}[H]
-	 	\centering
-	 	\includegraphics[width=0.6\linewidth]{img/loglogplot_KM.png}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/loglogplot_KM.png}
 	 	\caption{log-log plot lék vs placebo}
 	 	\label{fig:loglogplot_drug_vs_placebo}
-	 \end{figure}
+	\end{figure}
 	
+	Je vidět, že grafy nejsou \uvoz{rovnoběžné}, na několika místech se kříží. 
+    Znamená to, že v tomto případě Coxův model nelze použít. 
 
-	\subsection{Model}
+	%\subsection{Model}
 	
 	\newpage
 	\section{Závěr}\label{sec:zaver}
-	tba tba
+	Tato práce 
 
 \end{document}
