@@ -400,7 +400,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
        \centering
        \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|}
            \hline
-           Distribution &
+           \textbf{Distribution} &
            $\alpha$ &
            $\beta$ &
            $\gamma$ &
@@ -437,35 +437,6 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
        \normalsize
    \end{table}
     
-%    \begin{table}[H]
-%        \tiny
-%        \centering
-%            \begin{tabular}{llllllllllllllrrrrl}
-%            \toprule
-%            & Distribution & Alpha & Beta & Gamma & Alpha 1 & Beta 1 & Alpha 2 & Beta 2 & Proportion 1 & DS & Mu & Sigma & Lambda & Log-likelihood & AICc & BIC & AD & optimizer \\
-%            \midrule
-%            0 & WeibullMixture &  &  &  & 20.74 & 2.23 & 98.21 & 12.93 & 0.53 &  &  &  &  & -63.67 & 142.33 & 141.78 & 6.16 & TNC \\
-%            0 & Gamma3P & 118.42 & 0.55 & 2.00 &  &  &  &  &  &  &  &  &  & -68.45 & 144.61 & 145.56 & 6.82 & TNC \\
-%            0 & Exponential_1P &  &  &  &  &  &  &  &  &  &  &  & 0.02 & -71.47 & 145.19 & 145.83 & 6.44 & TNC \\
-%            0 & Weibull_CR &  &  &  & 86.32 & 0.86 & 100.28 & 17.23 &  &  &  &  &  & -67.42 & 145.91 & 146.40 & 6.26 & TNC \\
-%            0 & Exponential_2P &  &  & 2.00 &  &  &  &  &  &  &  &  & 0.02 & -70.86 & 146.53 & 147.51 & 6.61 & TNC \\
-%            0 & Weibull_3P & 57.46 & 0.69 & 2.00 &  &  &  &  &  &  &  &  &  & -69.48 & 146.67 & 147.62 & 6.68 & TNC \\
-%            0 & Weibull_2P & 61.35 & 1.15 &  &  &  &  &  &  &  &  &  &  & -71.27 & 147.35 & 148.33 & 6.50 & TNC \\
-%            0 & Gamma_2P & 49.03 & 1.21 &  &  &  &  &  &  &  &  &  &  & -71.31 & 147.42 & 148.41 & 6.48 & TNC \\
-%            0 & Loglogistic_2P & 40.88 & 1.47 &  &  &  &  &  &  &  &  &  &  & -72.07 & 148.93 & 149.91 & 6.33 & TNC \\
-%            0 & Lognormal_2P &  &  &  &  &  &  &  &  &  & 3.66 & 1.19 &  & -72.11 & 149.02 & 150.00 & 6.36 & L-BFGS-B \\
-%            0 & Weibull_DS & 61.35 & 1.15 &  &  &  &  &  &  & 1.00 &  &  &  & -71.27 & 150.26 & 151.22 & 6.50 & TNC \\
-%            0 & Loglogistic_3P & 40.43 & 1.44 & 0.34 &  &  &  &  &  &  &  &  &  & -72.06 & 151.84 & 152.80 & 6.32 & TNC \\
-%            0 & Lognormal_3P &  &  & 0.00 &  &  &  &  &  &  & 3.66 & 1.19 &  & -72.11 & 151.93 & 152.89 & 6.36 & L-BFGS-B \\
-%            0 & Normal_2P &  &  &  &  &  &  &  &  &  & 54.95 & 40.21 &  & -74.39 & 153.59 & 154.57 & 6.97 & TNC \\
-%            0 & Gumbel_2P &  &  &  &  &  &  &  &  &  & 74.07 & 35.81 &  & -75.54 & 155.88 & 156.86 & 6.93 & TNC \\
-%            \bottomrule
-%        \end{tabular}
-%        \caption{Odhady parametrů pro podskupinu pacientů léčených placebem}
-%        \label{tab:fitall_output_parameters_tab_placebo}
-%        \normalsize
-%    \end{table}
-    
     
     
     
@@ -495,25 +466,73 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{figure}
 
 	\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\linewidth]{img/four_men_placebo_compared_to_parametrics.png}
-	\caption{Four men placebo compared to parametrics}
-	\label{fig:four_men_placebo}
-\end{figure}
+    	\centering
+    	\includegraphics[width=0.9\linewidth]{img/four_men_placebo_compared_to_parametrics.png}
+    	\caption{Four men placebo compared to parametrics}
+    	\label{fig:four_men_placebo_comp_to_parametrics}
+    \end{figure}
 	
 	Zde je počet dnů vynesen pouze do hodnoty 110, jelikož maximální hodnota \texttt{survt} pro pacienty léčené placebem je 103.
 	
 	
 	\section{Porovnání podskupin lék vs. placebo} \label{sec:comparison_drug_vs_placebo}
-	aaaaa
-	
-	V této sekci uvedem porovnání modelů, sestavených v předchozích sekcích. Konkrétně tedy budeme porovnávat 
-	\begin{itemize}
-		\item a
-		\item b
-	\end{itemize}
+	V této sekci uvedeme porovnání modelů, sestavených v předchozích sekcích. Na Obrázku~\ref{fig:TTTplot} je TTTplot (total time in test), konstruovaný na základě Kaplan-Meiera. 
+    Je vidět, že pacienti, dostávající placebo, umírali výrazně rychleji. Na grafu pacientů, léčených lékem (modrá barva) je mezi 150. a 360. dnem vidět plató - patrně lze říct, že u dosud přeživších se eskalace nemoci zastavila (lék zabral).
 
-	
+	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{img/TTTplot_using_KM.png}
+        \caption{TTT plot (na základě Kaplan-Meiera)}
+        \label{fig:TTTplot}
+    \end{figure}
+    
+    Obrázek~\ref{fig:SF_for_parametric} je ve shodě s Obrázkem~\ref{fig:TTTplot}, tedy ilustruje o něco rychlejší (ve smysu doby do úmrtí) průběh nemoci u pacientů, kteří dostávali placebo.
+    
+   	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{img/survival_function_drug_vs_placebo_parametric.png}
+        \caption{Průběh survival function pro vybrané parametrické modely}
+        \label{fig:SF_for_parametric}
+    \end{figure}
+    
+   	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/survival_function_drug_vs_placebo_NON_parametric.png}
+        \caption{Průběh survival function pro vybrané neparametrické modely}
+        \label{fig:SF_for_nonparametric}
+    \end{figure}    
+    
+    Na Obrázku~\ref{fig:HF_for_parametric} je průběh intenzity poruch pro dvě zvolené parametrické hustoty: lognormální o dvou parametrech (popisující podskupinu pacientů, léčených lékem) a exponenciální o jednom parametru (popisující podskupinu pacientů, léčených placebem).
+    Pacienti s placebem mají \textit{constant failure rate}. U pacientů s lékem je vidět, že pokud pacient přežije prvních 30 dnů léčby, dále riziko úmrtí bude klesat.
+    
+   	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{img/hazard_rate_drug_vs_placebo_parametric_my_choice.png}
+        \caption{Průběh intenzity poruch (\textit{hazard function}) pro vybrané parametrické modely}
+        \label{fig:HF_for_parametric}
+    \end{figure} 
+    
+   	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/cumulative_hazard_function_drug_vs_placebo_TRIPLE.png}
+        \caption{Kumulativní intenzity poruch (\textit{cumulative hazard function})}
+        \label{fig:CHF_for_parametric}
+    \end{figure}     
+    
+    
+    Vybrané číselné charakteristiky jsou uvedeny v tabulce níže.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{@{}lllllll@{}}
+            Podskupina               & Použitý model & MTTF {[}dnů{]} & $t_{\mbox{med}}$ & MRL {[}dnů{]} &  &  \\
+            \multirow{2}{*}{Lék}     & logNormal2P   &                &                  &               &  &  \\
+            & Kaplan-Meier  &                & 54               &               &  &  \\
+            \multirow{2}{*}{Placebo} & Exp1P         &                &                  &               &  &  \\
+            & Kaplan-Meier  &                & 29               &               &  & 
+        \end{tabular}
+        \caption{MRL = střední zbytková doba života (mean resudual life), MTTF = střední doba do úmrtí (mean time to failure), $t_{\mbox{med}}$ = mediánová doba života}
+        \label{tab:statistics}
+    \end{table}
 	
 	\newpage
 	\section{Coxův regresní model} \label{sec:cox_model}
@@ -532,9 +551,26 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{figure}
 	
 	Je vidět, že grafy nejsou \uvoz{rovnoběžné}, na několika místech se kříží. 
-    Znamená to, že v tomto případě Coxův model nelze použít. 
+    Znamená to, že v tomto případě Coxův regresní model nelze použít. 
 
 	%\subsection{Model}
+    
+    \begin{postulate}[DO NOT leave]
+        Důvodem, proč nemohu použít Coxův proporcionální model rizik pro mou situaci, je přítomnost několika závažných problémů ve sbírce dat a vlastnostech mého datového souboru:
+        
+        1. Necenzurovaná data: Coxův model předpokládá, že data jsou cenzurována pouze zprava, což znamená, že neposkytuje adekvátní analýzu, pokud mám data cenzurována zleva nebo jsou nedostupná. Pokud je v mé datové sadě přítomnost těchto typů cenzury, mohou výsledky modelu být zkreslené a nepřesné.
+        
+        2. Nelinearita v efektech: Coxův model funguje nejlépe, pokud se předpokládá, že efekty proměnných jsou lineární v čase. Pokud mám důvody domnívat se, že efekty se mohou měnit nebo jsou nelineární, model nemusí poskytnout adekvátní odhady rizika.
+        
+        3. Interakce mezi proměnnými: Pokud existují interakce mezi proměnnými, které ovlivňují riziko, Coxův model může být problematický. Model nefunguje dobře při komplexních vztazích mezi proměnnými.
+        
+        4. Nízký počet událostí: Coxův model vyžaduje dostatečný počet událostí v porovnání s počtem proměnných, aby byl spolehlivý a stabilní. Pokud mám málo událostí ve srovnání s počtem proměnných, model může vykazovat nedostatečnou přesnost.
+        
+        5. Nezávislé pozorování: Coxův model předpokládá, že pozorování jsou nezávislá. Pokud mám v datech přítomnost korelovaných nebo shlukovaných pozorování, může to model zpochybnit.
+        
+        Vzhledem k těmto omezením je vhodné hledat alternativní modely, které lépe odpovídají charakteru mých dat a umožní spolehlivě odhadnout riziko ve zkoumaném kontextu.
+    \end{postulate}
+    
 	
 	\newpage
 	\section{Závěr}\label{sec:zaver}
