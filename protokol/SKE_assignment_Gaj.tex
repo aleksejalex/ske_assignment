@@ -195,7 +195,9 @@
 	\end{itemize}} 
 	\noindent
 	\textbf{C)} \textit{Graficky srovnejte log-logR ploty pro obě podskupiny a na jejich základě zdůvodněte vhodnost/nevhodnost užití Coxova PH (proportional hazard) modelu.} \\
-	\vfill{2cm}
+    
+	\vfill{2em}
+    
     \noindent
 	\textbf{Skupina II.:}  treat=1(standard) versus treat=2(placebo) pro cell=2(small) \\
 	
@@ -369,6 +371,48 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\caption{Odhady parametrů pro podskupinu pacientů léčených lékem}
 	\label{tab:fitall_output_parameters_tab}
 	\normalsize
+\end{table}
+
+\begin{table}[H]
+    \tiny
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|}
+        \hline
+        \textbf{Distribution} &
+        $\alpha$ &
+        $\beta$ &
+        $\gamma$ &
+        $\alpha_1$ &
+        $\beta_1$ &
+        $\alpha_2$ &
+        $\beta_2$ &
+        Prop. 1 &
+        DS &
+        $\mu$ &
+        $\sigma$ &
+        $\lambda$ &
+        \textbf{Log-like.} &
+        \textbf{AIC} &
+        \textbf{BIC} \\ \hline
+        Gamma3P       & 270.72 & 0.50 & 4.00 &        &      &        &        &      &      &        &        &      & -120.39 & 247.71 & 250.99 \\ \hline
+        Weibull3P     & 106.13 & 0.61 & 4.00 &        &      &        &        &      &      &        &        &      & -120.93 & 248.79 & 252.07 \\ \hline
+        WeibullMixt.  &        &      &      & 56.57  & 1.10 & 389.96 & 116.37 & 0.76 &      &        &        &      & -118.04 & 248.57 & 253.08 \\ \hline
+        Loglogistic3P & 57.80  & 0.78 & 4.00 &        &      &        &        &      &      &        &        &      & -122.66 & 252.25 & 255.53 \\ \hline
+        WeibullCR     &        &      &      & 128.49 & 0.74 & 390.17 & 120.53 &      &      &        &        &      & -121.13 & 251.86 & 255.86 \\ \hline
+        Lognormal2P   &        &      &      &        &      &        &        &      &      & 4.13   & 1.39   &      & -124.59 & 253.62 & 255.98 \\ \hline
+        Exponential1P &        &      &      &        &      &        &        &      &      &        &        & 0.01 & -126.91 & 255.97 & 257.23 \\ \hline
+        Loglogistic2P & 60.37  & 1.19 &      &        &      &        &        &      &      &        &        &      & -125.30 & 255.04 & 257.39 \\ \hline
+        Lognormal3P   &        &      & 3.00 &        &      &        &        &      &      & 4.02   & 1.63   &      & -123.98 & 254.87 & 258.15 \\ \hline
+        Exponential2P &        &      & 4.00 &        &      &        &        &      &      &        &        & 0.01 & -125.87 & 256.18 & 258.54 \\ \hline
+        Weibull2P     & 114.41 & 0.83 &      &        &      &        &        &      &      &        &        &      & -126.20 & 256.85 & 259.21 \\ \hline
+        Gamma2P       & 153.69 & 0.80 &      &        &      &        &        &      &      &        &        &      & -126.49 & 257.43 & 259.79 \\ \hline
+        WeibullDS     & 114.41 & 0.83 &      &        &      &        &        &      & 1.00 &        &        &      & -126.20 & 259.33 & 262.61 \\ \hline
+        Normal2P      &        &      &      &        &      &        &        &      &      & 112.97 & 119.09 &      & -141.89 & 288.23 & 290.58 \\ \hline
+        Gumbel2P      &        &      &      &        &      &        &        &      &      & 185.54 & 139.42 &      & -147.79 & 300.02 & 302.38 \\ \hline
+    \end{tabular}
+    \caption{Odhady parametrů pro podskupinu pacientů léčených lékem}
+    \label{tab:fitall_output_parameters_tab}
+    \normalsize
 \end{table}
 
 	Na základě vizuálního vyhodnocení P-plotů a PP-plotů (Obr.~\ref{fig:fit_everything_drug_P_plots} a Obr.~\ref{fig:fit_everything_drug_PP_plots})
