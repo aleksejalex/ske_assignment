@@ -195,7 +195,8 @@
 	\end{itemize}} 
 	\noindent
 	\textbf{C)} \textit{Graficky srovnejte log-logR ploty pro obě podskupiny a na jejich základě zdůvodněte vhodnost/nevhodnost užití Coxova PH (proportional hazard) modelu.} \\
-	\noindent
+	\vfill{2cm}
+    \noindent
 	\textbf{Skupina II.:}  treat=1(standard) versus treat=2(placebo) pro cell=2(small) \\
 	
 	\newpage
@@ -393,6 +394,81 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\caption{PP ploty pro jednotlivé fity}
 		\label{fig:fit_everything_placebo_PP_plots}
 	\end{figure}
+    
+   \begin{table}[H]
+       \tiny
+       \centering
+       \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|}
+           \hline
+           Distribution &
+           $\alpha$ &
+           $\beta$ &
+           $\gamma$ &
+           $\alpha_1$ &
+           $\beta_1$ &
+           $\alpha_2$ &
+           $\beta_2$ &
+           Prop.1 &
+           DS &
+           $\mu$ &
+           $\sigma$ &
+           $\lambda$ &
+           \textbf{Log-like.} &
+           \textbf{AIC} &
+           \textbf{BIC} \\ \hline
+           WeibullMixt. &        &      &      & 20.74 & 2.23 & 98.21  & 12.93 & 0.53 &      &       &       &      & -63.67 & 142.33 & 141.78 \\ \hline
+           Gamma3P        & 118.42 & 0.55 & 2.00 &       &      &        &       &      &      &       &       &      & -68.45 & 144.61 & 145.56 \\ \hline
+           Exponential1P  &        &      &      &       &      &        &       &      &      &       &       & 0.02 & -71.47 & 145.19 & 145.83 \\ \hline
+           WeibullCR      &        &      &      & 86.32 & 0.86 & 100.28 & 17.23 &      &      &       &       &      & -67.42 & 145.91 & 146.40 \\ \hline
+           Exponential2P  &        &      & 2.00 &       &      &        &       &      &      &       &       & 0.02 & -70.86 & 146.53 & 147.51 \\ \hline
+           Weibull3P      & 57.46  & 0.69 & 2.00 &       &      &        &       &      &      &       &       &      & -69.48 & 146.67 & 147.62 \\ \hline
+           Weibull2P      & 61.35  & 1.15 &      &       &      &        &       &      &      &       &       &      & -71.27 & 147.35 & 148.33 \\ \hline
+           Gamma2P        & 49.03  & 1.21 &      &       &      &        &       &      &      &       &       &      & -71.31 & 147.42 & 148.41 \\ \hline
+           Loglogistic2P  & 40.88  & 1.47 &      &       &      &        &       &      &      &       &       &      & -72.07 & 148.93 & 149.91 \\ \hline
+           Lognormal2P    &        &      &      &       &      &        &       &      &      & 3.66  & 1.19  &      & -72.11 & 149.02 & 150.00 \\ \hline
+           WeibullDS      & 61.35  & 1.15 &      &       &      &        &       &      & 1.00 &       &       &      & -71.27 & 150.26 & 151.22 \\ \hline
+           Loglogistic3P  & 40.43  & 1.44 & 0.34 &       &      &        &       &      &      &       &       &      & -72.06 & 151.84 & 152.80 \\ \hline
+           Lognormal3P    &        &      & 0.00 &       &      &        &       &      &      & 3.66  & 1.19  &      & -72.11 & 151.93 & 152.89 \\ \hline
+           Normal2P       &        &      &      &       &      &        &       &      &      & 54.95 & 40.21 &      & -74.39 & 153.59 & 154.57 \\ \hline
+           Gumbel2P       &        &      &      &       &      &        &       &      &      & 74.07 & 35.81 &      & -75.54 & 155.88 & 156.86 \\ \hline
+       \end{tabular}
+       \caption{Odhady parametrů pro podskupinu pacientů léčených placebem}
+       \label{tab:fitall_output_parameters_tab_placebo}
+       \normalsize
+   \end{table}
+    
+%    \begin{table}[H]
+%        \tiny
+%        \centering
+%            \begin{tabular}{llllllllllllllrrrrl}
+%            \toprule
+%            & Distribution & Alpha & Beta & Gamma & Alpha 1 & Beta 1 & Alpha 2 & Beta 2 & Proportion 1 & DS & Mu & Sigma & Lambda & Log-likelihood & AICc & BIC & AD & optimizer \\
+%            \midrule
+%            0 & WeibullMixture &  &  &  & 20.74 & 2.23 & 98.21 & 12.93 & 0.53 &  &  &  &  & -63.67 & 142.33 & 141.78 & 6.16 & TNC \\
+%            0 & Gamma3P & 118.42 & 0.55 & 2.00 &  &  &  &  &  &  &  &  &  & -68.45 & 144.61 & 145.56 & 6.82 & TNC \\
+%            0 & Exponential_1P &  &  &  &  &  &  &  &  &  &  &  & 0.02 & -71.47 & 145.19 & 145.83 & 6.44 & TNC \\
+%            0 & Weibull_CR &  &  &  & 86.32 & 0.86 & 100.28 & 17.23 &  &  &  &  &  & -67.42 & 145.91 & 146.40 & 6.26 & TNC \\
+%            0 & Exponential_2P &  &  & 2.00 &  &  &  &  &  &  &  &  & 0.02 & -70.86 & 146.53 & 147.51 & 6.61 & TNC \\
+%            0 & Weibull_3P & 57.46 & 0.69 & 2.00 &  &  &  &  &  &  &  &  &  & -69.48 & 146.67 & 147.62 & 6.68 & TNC \\
+%            0 & Weibull_2P & 61.35 & 1.15 &  &  &  &  &  &  &  &  &  &  & -71.27 & 147.35 & 148.33 & 6.50 & TNC \\
+%            0 & Gamma_2P & 49.03 & 1.21 &  &  &  &  &  &  &  &  &  &  & -71.31 & 147.42 & 148.41 & 6.48 & TNC \\
+%            0 & Loglogistic_2P & 40.88 & 1.47 &  &  &  &  &  &  &  &  &  &  & -72.07 & 148.93 & 149.91 & 6.33 & TNC \\
+%            0 & Lognormal_2P &  &  &  &  &  &  &  &  &  & 3.66 & 1.19 &  & -72.11 & 149.02 & 150.00 & 6.36 & L-BFGS-B \\
+%            0 & Weibull_DS & 61.35 & 1.15 &  &  &  &  &  &  & 1.00 &  &  &  & -71.27 & 150.26 & 151.22 & 6.50 & TNC \\
+%            0 & Loglogistic_3P & 40.43 & 1.44 & 0.34 &  &  &  &  &  &  &  &  &  & -72.06 & 151.84 & 152.80 & 6.32 & TNC \\
+%            0 & Lognormal_3P &  &  & 0.00 &  &  &  &  &  &  & 3.66 & 1.19 &  & -72.11 & 151.93 & 152.89 & 6.36 & L-BFGS-B \\
+%            0 & Normal_2P &  &  &  &  &  &  &  &  &  & 54.95 & 40.21 &  & -74.39 & 153.59 & 154.57 & 6.97 & TNC \\
+%            0 & Gumbel_2P &  &  &  &  &  &  &  &  &  & 74.07 & 35.81 &  & -75.54 & 155.88 & 156.86 & 6.93 & TNC \\
+%            \bottomrule
+%        \end{tabular}
+%        \caption{Odhady parametrů pro podskupinu pacientů léčených placebem}
+%        \label{tab:fitall_output_parameters_tab_placebo}
+%        \normalsize
+%    \end{table}
+    
+    
+    
+    
 	
 	\subsection{Neparametrické modely} \label{sec:non_parametric_all}
 	V Podsekcích~\ref{sec:non_parametric_drugs}~a~\ref{sec:non_parametric_placebo} jsou pro obě skupiny pacientů (tj. léčení lékem a léčení placebem) uvedeny odhady Kaplan-Meiera a Nelson-Aalena.
