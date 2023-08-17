@@ -195,7 +195,7 @@
 	\noindent
 	\textbf{C)} \textit{Graficky srovnejte log-logR ploty pro obě podskupiny a na jejich základě zdůvodněte vhodnost/nevhodnost užití Coxova PH (proportional hazard) modelu.} \\
     
-	\vfill{2em}
+	\vfill{}
     
     \noindent
 	\textbf{Skupina II.:}  treat=1(standard) versus treat=2(placebo) pro cell=2(small) \\
@@ -310,7 +310,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1.0\linewidth]{img/fiteverything_drugs_histogram.png}
+		\includegraphics[width=0.9\linewidth]{img/fiteverything_drugs_histogram.png}
 		\caption{Histogram a proložené hustoty}
 		\label{fig:fit_everything_hist_drugs}
 	\end{figure}
@@ -324,7 +324,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1.0\linewidth]{img/fiteverything_drug_PP_plots.png}
+		\includegraphics[width=0.8\linewidth]{img/fiteverything_drug_PP_plots.png}
 		\caption{PP ploty pro jednotlivé modely}
 		\label{fig:fit_everything_drug_PP_plots}
 	\end{figure}
@@ -427,16 +427,23 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/fiteverything_placebo_histogram.png}
-		\caption{Fit all Placebo}
+		\caption{Histogram a proložené hustoty}
 		\label{fig:fit_everything_hist_placebo}
 	\end{figure}
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{img/fiteverything_placebo_PP_plots.png}
-		\caption{PP ploty pro jednotlivé fity}
-		\label{fig:fit_everything_placebo_PP_plots}
+		\includegraphics[width=1.0\linewidth]{img/fiteverything_placebo_P_plots.png}
+		\caption{Probability ploty pro jednotlivé modely}
+		\label{fig:fit_everything_placebo_P_plots}
 	\end{figure}
+    
+	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/fiteverything_placebo_PP_plots.png}
+        \caption{PP ploty pro jednotlivé modely}
+        \label{fig:fit_everything_placebo_PP_plots}
+    \end{figure}
     
     Číselné hodnoty parametrů jsou opět uvedeny v tabulce.
     
@@ -491,29 +498,42 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	Na grafech jsou pro porovnání vyneseny také vybrané parametrické odhady (viz Sekce~\ref{sec:parametric_all}).
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:non_parametric_drugs}
-	
+	Na Obrázku~\ref{fig:four_men_drugs} jsou \textit{survival function} (SF), \textit{cumulative distribution function} (CDF) a complementary hazard function (CHF).
+    
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.9\linewidth]{img/four_men_drugs.png}
-		\caption{Four men drugs}
+		\caption{SF, CDF a CHF pro odhad Nelson-Aalena a Kaplan-Meiera pro podskupinu pacientů, léčených lékem}
 		\label{fig:four_men_drugs}
 	\end{figure}
+    
+    Na ose x je vynesen počet dnů do hodnoty 400, jelikož maximální hodnota \texttt{survt} pro pacienty léčené lékem je 392.
+    
+    Obrázku~\ref{fig:four_men_drugs_compared_to_parametrics} ilustruje shodu těchto neparametrických metod s parametrickými modely, zvolenými v předchozí sekci.
+    
+	\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/four_men_drugs_compared_to_parametrics.png}
+        \caption{SF, CDF a CHF - porovnání parametricky a neparametricky}
+        \label{fig:four_men_drugs_compared_to_parametrics}
+    \end{figure}
 
-	Na ose x je vynesen počet dnů do hodnoty 400, jelikož maximální hodnota \texttt{survt} pro pacienty léčené lékem je 392.
+	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:non_parametric_placebo}
-	
+	Opět SF, CDF a CHF pro podskupinu pacientů léčenou placebem.
+    
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.9\linewidth]{img/four_men_placebo.png}
-		\caption{Four men placebo}
+		\caption{SF, CDF a CHF pro odhad Nelson-Aalena a Kaplan-Meiera pro podskupinu pacientů, léčených placebem}
 		\label{fig:four_men_placebo}
 	\end{figure}
 
 	\begin{figure}[H]
     	\centering
     	\includegraphics[width=0.9\linewidth]{img/four_men_placebo_compared_to_parametrics.png}
-    	\caption{Four men placebo compared to parametrics}
+    	\caption{SF, CDF a CHF - porovnání parametricky a neparametricky}
     	\label{fig:four_men_placebo_comp_to_parametrics}
     \end{figure}
 	
@@ -559,7 +579,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
     
    	\begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\linewidth]{img/cumulative_hazard_function_drug_vs_placebo_TRIPLE.png}
+        \includegraphics[width=1.0\linewidth]{img/cumulative_hazard_function_drug_vs_placebo_TRIPLE.png}
         \caption{Kumulativní intenzity poruch (\textit{cumulative hazard function})}
         \label{fig:CHF_for_parametric}
     \end{figure}     
