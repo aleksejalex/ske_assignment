@@ -59,8 +59,7 @@
 %\usepackage[printwatermark]{xwatermark}
 
 \usepackage{bm}
-\usepackage{adjustbox}
-\usepackage{changepage}   % for \begin{adjustwidth}{-2cm}{} \end{adjustwidth}{}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% My unique commands in LaTeX
@@ -279,14 +278,15 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 		\label{fig:boxplotdrugvsplacebo}
 	\end{figure}
 
-	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení pacientů léčených lékem a placebem mezi censorovanými\footnote{V kontextu spolehlivostní analýzy censorované pozorování je neúplné nebo ne zcela pozorované měření. V tomto případě censorovaná pozorování jsou například pacienti, kteří přežili po celou dobu experimentu (a tedy okamžik úmrtí nebyl zaznamenán) nebo ukončili léčbu předčasně. Tedy necensorovaná pozorování představují pacienty, jejichž úmrtí bylo pozorováno před koncem experimentu.} a necensorovanými případy. 
+	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení pacientů léčených lékem a placebem mezi censorovanými\footnote{V kontextu spolehlivostní analýzy censorované pozorování je neúplné nebo ne zcela pozorované měření. V tomto případě censorovaná pozorování jsou například pacienti, kteří přežili po celou dobu experimentu (a tedy okamžik úmrtí nebyl zaznamenán) nebo ukončili léčbu předčasně. Necensorovaná pozorování představují pacienty, jejichž úmrtí bylo pozorováno před koncem experimentu.} a necensorovanými případy. 
 	Na všech třech boxplotech je vidět, že střední hodnota doby přežití je u pacientů léčených lékem vyšší, než u pacientů léčených placebem. Dokonce mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití.
 	 
 	Mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití. Může se jednat o případy, pro které testovaný lék je obzvláště účinný nebo pouze o přirozenou výjimku. Skutečnost, že taková odlehlá pozorování jsou pouze v případě léku a pouze na jednu stranu od průměru, napovídá k první variantě.
 	
 	Na Obrázku~\ref{fig:pairplot_my_data} je základní vizualizace datasetu (barevně jsou odděleny podskupiny, tj. lék a placebo).
+    Vizualizace je pomocí pairplotu, tj. mřížka grafů, kde řádky i sloupce představují jednotlivé proměnné (sloupce) v datech. Tedy pairplot odráží, jak vypadá závislost proměnných mezi sebou, a na diagonále jsou histogramy pro danou proměnnou.
 	
-	\begin{figure}%[H]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1.0\linewidth]{img/pairplot_my_data_huebytreat.png}
 		\caption{Pairplot}
@@ -295,8 +295,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	
 
 	\section{Parametrické a neparametrické modely}
-    Cílem této práce je určit, zda použití daného léku významně ovlivnilo dobu přežití u pacientů v dané skupině. 
-    Cílem této práce je najít vhodný model popisující určit, zda použití daného léku významně ovlivnilo dobu přežití u pacientů v dané skupině. 
+    %Cílem této práce je určit, zda použití daného léku významně ovlivnilo dobu přežití u pacientů v dané skupině. 
+    Cílem této práce je najít vhodný model popisující ve zvolené skupině doby dožití pro pacienty, kterým byl podáván lék a pro pacienty, kterým bylo podáváno placebo. 
 	Nyní se pokusíme najít nejlepší modely pro popis dat, tedy vytvoříme pro každou skupinu pacientů vlastní model. Nejprve vyzkoušíme pro každou podskupinu parametrický přístup, poté neparametrický a následně výsledné modely porovnáme.
 	
 	
@@ -311,67 +311,67 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1.0\linewidth]{img/fiteverything_drugs_histogram.png}
-		\caption{fit all lék}
+		\caption{Histogram a proložené hustoty}
 		\label{fig:fit_everything_hist_drugs}
 	\end{figure}
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{img/fiteverything_drug_P_plots.png}
-		\caption{P ploty pro jednotlivé fity}
+		\includegraphics[width=1.0\linewidth]{img/fiteverything_drug_P_plots.png}
+		\caption{P ploty pro jednotlivé modely}
 		\label{fig:fit_everything_drug_P_plots}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{img/fiteverything_drug_PP_plots.png}
-		\caption{PP ploty pro jednotlivé fity}
+		\includegraphics[width=1.0\linewidth]{img/fiteverything_drug_PP_plots.png}
+		\caption{PP ploty pro jednotlivé modely}
 		\label{fig:fit_everything_drug_PP_plots}
 	\end{figure}
 	
 	V Tabulce~\ref{tab:fitall_output_parameters_tab} jsou shrnuty hodnoty odhadnutých parametrů a také hodnoty \texttt{log-likelihood}, \texttt{AIC} a \texttt{BIC}.
 	
-\begin{table}[H]
-	\tiny
-	\centering
-	\begin{tabular}{@{}|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|@{}}
-		\toprule
-		\textbf{Distribution} &
-		$\alpha$ &
-		$\beta$ &
-		$\gamma$ &
-		$\alpha_1$ &
-		$\beta_1$ &
-		$\alpha_2$ &
-		$\beta_2$ &
-		Prop. 1 &
-		DS &
-		$\mu$ &
-		$\sigma$ &
-		$\lambda$ &
-		\textbf{Log-like.} &
-		\textbf{AIC} &
-		\textbf{BIC} \\ \toprule
-		Gamma3P       & 270.72 & 0.50 & 4.00 &        &      &        &        &      &      &        &        &      & -120.39 & 247.71 & 250.99 \\ \midrule
-		Weibull3P     & 106.13 & 0.61 & 4.00 &        &      &        &        &      &      &        &        &      & -120.93 & 248.79 & 252.07 \\ \midrule
-		WeibullMixt.  &        &      &      & 56.57  & 1.10 & 389.96 & 116.37 & 0.76 &      &        &        &      & -118.04 & 248.57 & 253.08 \\ \midrule
-		Loglogistic3P & 57.80  & 0.78 & 4.00 &        &      &        &        &      &      &        &        &      & -122.66 & 252.25 & 255.53 \\ \midrule
-		WeibullCR     &        &      &      & 128.49 & 0.74 & 390.17 & 120.53 &      &      &        &        &      & -121.13 & 251.86 & 255.86 \\ \midrule
-		Lognormal2P   &        &      &      &        &      &        &        &      &      & 4.13   & 1.39   &      & -124.59 & 253.62 & 255.98 \\ \midrule
-		Exponential1P &        &      &      &        &      &        &        &      &      &        &        & 0.01 & -126.91 & 255.97 & 257.23 \\ \midrule
-		Loglogistic2P & 60.37  & 1.19 &      &        &      &        &        &      &      &        &        &      & -125.30 & 255.04 & 257.39 \\ \midrule
-		Lognormal3P   &        &      & 3.00 &        &      &        &        &      &      & 4.02   & 1.63   &      & -123.98 & 254.87 & 258.15 \\ \midrule
-		Exponential2P &        &      & 4.00 &        &      &        &        &      &      &        &        & 0.01 & -125.87 & 256.18 & 258.54 \\ \midrule
-		Weibull2P     & 114.41 & 0.83 &      &        &      &        &        &      &      &        &        &      & -126.20 & 256.85 & 259.21 \\ \midrule
-		Gamma2P       & 153.69 & 0.80 &      &        &      &        &        &      &      &        &        &      & -126.49 & 257.43 & 259.79 \\ \midrule
-		WeibullDS     & 114.41 & 0.83 &      &        &      &        &        &      & 1.00 &        &        &      & -126.20 & 259.33 & 262.61 \\ \midrule
-		Normal2P      &        &      &      &        &      &        &        &      &      & 112.97 & 119.09 &      & -141.89 & 288.23 & 290.58 \\ \midrule
-		Gumbel2P      &        &      &      &        &      &        &        &      &      & 185.54 & 139.42 &      & -147.79 & 300.02 & 302.38 \\ \bottomrule
-	\end{tabular}
-	\caption{Odhady parametrů pro podskupinu pacientů léčených lékem}
-	\label{tab:fitall_output_parameters_tab}
-	\normalsize
-\end{table}
+%\begin{table}[H]
+%	\tiny
+%	\centering
+%	\begin{tabular}{@{}|l|l|l|l|l|l|l|l|l|l|l|l|l|r|r|r|@{}}
+%		\toprule
+%		\textbf{Distribution} &
+%		$\alpha$ &
+%		$\beta$ &
+%		$\gamma$ &
+%		$\alpha_1$ &
+%		$\beta_1$ &
+%		$\alpha_2$ &
+%		$\beta_2$ &
+%		Prop. 1 &
+%		DS &
+%		$\mu$ &
+%		$\sigma$ &
+%		$\lambda$ &
+%		\textbf{Log-like.} &
+%		\textbf{AIC} &
+%		\textbf{BIC} \\ \toprule
+%		Gamma3P       & 270.72 & 0.50 & 4.00 &        &      &        &        &      &      &        &        &      & -120.39 & 247.71 & 250.99 \\ \midrule
+%		Weibull3P     & 106.13 & 0.61 & 4.00 &        &      &        &        &      &      &        &        &      & -120.93 & 248.79 & 252.07 \\ \midrule
+%		WeibullMixt.  &        &      &      & 56.57  & 1.10 & 389.96 & 116.37 & 0.76 &      &        &        &      & -118.04 & 248.57 & 253.08 \\ \midrule
+%		Loglogistic3P & 57.80  & 0.78 & 4.00 &        &      &        &        &      &      &        &        &      & -122.66 & 252.25 & 255.53 \\ \midrule
+%		WeibullCR     &        &      &      & 128.49 & 0.74 & 390.17 & 120.53 &      &      &        &        &      & -121.13 & 251.86 & 255.86 \\ \midrule
+%		Lognormal2P   &        &      &      &        &      &        &        &      &      & 4.13   & 1.39   &      & -124.59 & 253.62 & 255.98 \\ \midrule
+%		Exponential1P &        &      &      &        &      &        &        &      &      &        &        & 0.01 & -126.91 & 255.97 & 257.23 \\ \midrule
+%		Loglogistic2P & 60.37  & 1.19 &      &        &      &        &        &      &      &        &        &      & -125.30 & 255.04 & 257.39 \\ \midrule
+%		Lognormal3P   &        &      & 3.00 &        &      &        &        &      &      & 4.02   & 1.63   &      & -123.98 & 254.87 & 258.15 \\ \midrule
+%		Exponential2P &        &      & 4.00 &        &      &        &        &      &      &        &        & 0.01 & -125.87 & 256.18 & 258.54 \\ \midrule
+%		Weibull2P     & 114.41 & 0.83 &      &        &      &        &        &      &      &        &        &      & -126.20 & 256.85 & 259.21 \\ \midrule
+%		Gamma2P       & 153.69 & 0.80 &      &        &      &        &        &      &      &        &        &      & -126.49 & 257.43 & 259.79 \\ \midrule
+%		WeibullDS     & 114.41 & 0.83 &      &        &      &        &        &      & 1.00 &        &        &      & -126.20 & 259.33 & 262.61 \\ \midrule
+%		Normal2P      &        &      &      &        &      &        &        &      &      & 112.97 & 119.09 &      & -141.89 & 288.23 & 290.58 \\ \midrule
+%		Gumbel2P      &        &      &      &        &      &        &        &      &      & 185.54 & 139.42 &      & -147.79 & 300.02 & 302.38 \\ \bottomrule
+%	\end{tabular}
+%	\caption{Odhady parametrů pro podskupinu pacientů léčených lékem}
+%	\label{tab:fitall_output_parameters_tab}
+%	\normalsize
+%\end{table}
 
 \begin{table}[H]
     \tiny
@@ -415,11 +415,9 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
     \normalsize
 \end{table}
 
-	Na základě vizuálního vyhodnocení P-plotů a PP-plotů (Obr.~\ref{fig:fit_everything_drug_P_plots} a Obr.~\ref{fig:fit_everything_drug_PP_plots})
-
-	Na Obrázku~\ref{fig:four_men_drugs} je porovnání \commm{ceho?} pro
+	Na základě vizuálního vyhodnocení P-plotů a PP-plotů (Obr.~\ref{fig:fit_everything_drug_P_plots} a Obr.~\ref{fig:fit_everything_drug_PP_plots}) 
 	
-	Je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, a to i ve srovnání s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena (viz Podsekce~\ref{sec:neparametric_all}), a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu.
+	Je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, a to i ve srovnání s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena (viz Podsekce~\ref{sec:non_parametric_all}), a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu.
 	
 	
 	
@@ -530,7 +528,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
         \label{fig:TTTplot}
     \end{figure}
     
-    Obrázek~\ref{fig:SF_for_parametric} je ve shodě s Obrázkem~\ref{fig:TTTplot}, tedy ilustruje o něco rychlejší (ve smysu doby do úmrtí) průběh nemoci u pacientů, kteří dostávali placebo.
+    Obrázek~\ref{fig:SF_for_parametric} je ve shodě s Obrázkem~\ref{fig:TTTplot}, tedy ilustruje o něco rychlejší (ve smyslu doby do úmrtí) průběh nemoci u pacientů, kteří dostávali placebo.
     
    	\begin{figure}[H]
         \centering
@@ -565,18 +563,37 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
     
     
     Vybrané číselné charakteristiky jsou uvedeny v tabulce níže.
-    \begin{table}[H]
-        \centering
-        \begin{tabular}{@{}lllllll@{}}
-            Podskupina               & Použitý model & MTTF {[}dnů{]} & $t_{\mbox{med}}$ & MRL {[}dnů{]} &  &  \\
-            \multirow{2}{*}{Lék}     & logNormal2P   &                &                  &               &  &  \\
-            & Kaplan-Meier  &                & 54               &               &  &  \\
-            \multirow{2}{*}{Placebo} & Exp1P         &                &                  &               &  &  \\
-            & Kaplan-Meier  &                & 29               &               &  & 
-        \end{tabular}
-        \caption{MRL = střední zbytková doba života (mean resudual life), MTTF = střední doba do úmrtí (mean time to failure), $t_{\mbox{med}}$ = mediánová doba života}
-        \label{tab:statistics}
-    \end{table}
+ 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lcrrr@{}}
+        \toprule
+        \multicolumn{1}{c}{Podskupina} & Použitý model & \multicolumn{1}{c}{MTTF {[}dnů{]}} & \multicolumn{1}{c}{$t_{\mbox{med}}$} & \multicolumn{1}{c}{MRL {[}dnů{]}} \\ \midrule
+        \multirow{2}{*}{Lék}     & logNormal2P  & 163.64 & 62.11 & 270.4 \\
+        & Kaplan-Meier & 129.95 & 54    &       \\
+        \multirow{2}{*}{Placebo} & Exp1P        & 60.64  & 42.03 & 60.64 \\
+        & Kaplan-Meier & 54.16  & 29    &       \\ \bottomrule
+    \end{tabular}
+    \caption{MRL = střední zbytková doba života (mean resudual life), MTTF = střední doba do úmrtí (mean time to failure), $t_{\mbox{med}}$ = mediánová doba života}
+    \label{tab:statistics}
+\end{table}
+
+
+%\begin{table}%[H]
+%    \centering
+%    \begin{tabular}{@{}|l|c|r|r|r|@{}}
+%        \toprule
+%        \multicolumn{1}{|c|}{Podskupina} & Použitý model & \multicolumn{1}{c|}{MTTF {[}dnů{]}} & \multicolumn{1}{c|}{$t_{\mbox{med}}$} & \multicolumn{1}{c|}{MRL {[}dnů{]}} \\ \midrule
+%        \multirow{2}{*}{Lék}             &  logNormal2P  &                              163.64 &                                 62.11 &                              270.4 \\
+%        \cmidrule(l){2-5}                & Kaplan-Meier  &                              129.95 &                                    54 &                                    \\ \midrule
+%        \multirow{2}{*}{Placebo}         &     Exp1P     &                               60.64 &                                 42.03 &                              60.64 \\
+%        \cmidrule(l){2-5}                & Kaplan-Meier  &                               54.16 &                                    29 &                                    \\ \bottomrule
+%    \end{tabular}
+%    \caption{MRL = střední zbytková doba života (mean resudual life), MTTF = střední doba do úmrtí (mean time to failure), $t_{\mbox{med}}$ = mediánová doba života}
+%    \label{tab:statistics}
+%\end{table}
+    
+    
 	
 	\newpage
 	\section{Coxův regresní model} \label{sec:cox_model}
