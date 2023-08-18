@@ -224,11 +224,11 @@
 		prith & prior therapy (0 = none, 10= some)                             \\
 		\bottomrule
 	\end{tabular}
-	\caption{Popis proměnných v datasetu}
+	\caption{(Poskytnutý) popis proměnných v datasetu}
 	\label{tab:promenne_popis}
 \end{table}
 
-V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na celém datasetu, v Tabulce~\ref{tab:analyza_muj_dataset} pak analýza podskupiny \texttt{cell}=2.
+V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na celém datasetu, v Tabulce~\ref{tab:analyza_muj_dataset} pak analýza podskupiny \texttt{cell}=2.
 
 \begin{table}[H]
 	\centering
@@ -279,9 +279,9 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\end{figure}
 
 	Na Obrázku~\ref{fig:boxplotdrugvsplacebo} jsou tři boxploty, ilustrující rozdělení pacientů léčených lékem a placebem mezi censorovanými\footnote{V kontextu spolehlivostní analýzy censorované pozorování je neúplné nebo ne zcela pozorované měření. V tomto případě censorovaná pozorování jsou například pacienti, kteří přežili po celou dobu experimentu (a tedy okamžik úmrtí nebyl zaznamenán) nebo ukončili léčbu předčasně. Necensorovaná pozorování představují pacienty, jejichž úmrtí bylo pozorováno před koncem experimentu.} a necensorovanými případy. 
-	Na všech třech boxplotech je vidět, že střední hodnota doby přežití je u pacientů léčených lékem vyšší, než u pacientů léčených placebem. Dokonce mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití.
+	Na všech třech boxplotech je vidět, že střední hodnota doby přežití je u pacientů léčených lékem vyšší, než u pacientů léčených placebem. 
 	 
-	Mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití. Může se jednat o případy, pro které testovaný lék je obzvláště účinný nebo pouze o přirozenou výjimku. Skutečnost, že taková odlehlá pozorování jsou pouze v případě léku a pouze na jednu stranu od průměru, napovídá k první variantě.
+	Mezi skutečně léčenými pacienty je několik outlierů s výrazně nadprůměrnou dobou dožití. Může se jednat o případy, pro které testovaný lék je obzvláště účinný nebo se jedná pouze o přirozenou výjimku. Skutečnost, že taková odlehlá pozorování jsou pouze v případě léku a pouze na jednu stranu od průměru, napovídá k první variantě.
 	
 	Na Obrázku~\ref{fig:pairplot_my_data} je základní vizualizace datasetu (barevně jsou odděleny podskupiny, tj. lék a placebo).
     Vizualizace je pomocí pairplotu, tj. mřížka grafů, kde řádky i sloupce představují jednotlivé proměnné (sloupce) v datech. Tedy pairplot odráží, jak vypadá závislost proměnných mezi sebou, a na diagonále jsou histogramy pro danou proměnnou.
@@ -303,7 +303,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	\subsection{Parametrické modely} \label{sec:parametric_all}
 	Ke hledání vhodného parametrického modelu použijeme existující implementaci v knihovně \texttt{reliability}. 
 	V Podsekcích~\ref{sec:parametric_drugs}~a~\ref{sec:parametric_placebo} jsou pokaždé uvedeny grafické výstupy funkce \texttt{Fit\_Everything} a stručná diskuze, vysvětlující volbu konkrétní hustoty.
-	Funkce \texttt{Fit\_Everything} proloží poskytnutá data pomocí 15 předdefinovaných hustot a pro každou odhadne hodnoty parametrů. Následně vykreslí PP ploty a probability ploty pro každý fit.
+	Funkce \texttt{Fit\_Everything} proloží poskytnutá data pomocí 15 předdefinovaných hustot a pro každou odhadne hodnoty parametrů. Následně vykreslí PP ploty a probability ploty pro každý model (\uvoz{fit}).
 	
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:parametric_drugs}
@@ -416,9 +416,9 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 \end{table}
 
 	Na základě vizuálního vyhodnocení P-plotů a PP-plotů (Obr.~\ref{fig:fit_everything_drug_P_plots} a Obr.~\ref{fig:fit_everything_drug_PP_plots}) 
-	
-	Je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, a to i ve srovnání s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena (viz Podsekce~\ref{sec:non_parametric_all}), a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu s parametry $\mu = 4.02$ a $\sigma = 1.63$.
-	
+	je vidět, že oba modely (\texttt{logNormal 2P} a \texttt{Gamma 3P}) popisují data podobně dobře, a to i ve srovnání s neparametrickými metodami Kaplan-Meiera a Nelson-Aalena (viz Podsekce~\ref{sec:non_parametric_all}), a tedy zvolíme jednodušší model -- dvouparametrickou lognormální hustotu s parametry $\mu = 4.02$ a $\sigma = 1.63$.
+    
+    (V následujících sekcích ověříme shodu zvoleného parametrického modelu s neparametrickými odhady.)
 	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:parametric_placebo}
@@ -489,7 +489,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
        \normalsize
    \end{table}
     
-    Pro podskupinu pacientů, léčených placebem jsme zvolili jednoparametrickou exponenciální hustotu s hodnotou parametru $\lambda = 0.0165$. Hustota \texttt{Gamma3P} popisuje data jen nepatrně lépe, zato ale se musí odhadovat 3 parametrz místo 1. Volíme tedy jednodušší model.
+    Pro podskupinu pacientů léčených placebem jsme zvolili jednoparametrickou exponenciální hustotu s hodnotou parametru $\lambda = 0.0165$. Hustota \texttt{Gamma3P} popisuje data jen nepatrně lépe, zato ale se musí odhadovat 3 parametry místo 1. Volíme tedy jednodušší model.
     
     
 	
@@ -498,18 +498,18 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
 	Na grafech jsou pro porovnání vyneseny také vybrané parametrické odhady (viz Sekce~\ref{sec:parametric_all}).
 	
 	\subsubsection{Pacienti léčení lékem} \label{sec:non_parametric_drugs}
-	Na Obrázku~\ref{fig:four_men_drugs} jsou \textit{survival function} (SF), \textit{cumulative distribution function} (CDF) a complementary hazard function (CHF).
+	Na Obrázku~\ref{fig:four_men_drugs} jsou \textit{survival function} (SF), \textit{cumulative distribution function} (CDF) a \textit{complementary hazard function} (CHF).
     
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.9\linewidth]{img/four_men_drugs.png}
-		\caption{SF, CDF a CHF pro odhad Nelson-Aalena a Kaplan-Meiera pro podskupinu pacientů, léčených lékem}
+		\caption{SF, CDF a CHF pro odhad Nelson-Aalena a Kaplan-Meiera pro podskupinu pacientů, léčených lékem.}
 		\label{fig:four_men_drugs}
 	\end{figure}
     
     Na ose x je vynesen počet dnů do hodnoty 400, jelikož maximální hodnota \texttt{survt} pro pacienty léčené lékem je 392.
     
-    Obrázku~\ref{fig:four_men_drugs_compared_to_parametrics} ilustruje shodu těchto neparametrických metod s parametrickými modely, zvolenými v předchozí sekci.
+    Obrázek~\ref{fig:four_men_drugs_compared_to_parametrics} ilustruje shodu těchto neparametrických metod s parametrickými modely, zvolenými v předchozí sekci.
     
 	\begin{figure}[H]
         \centering
@@ -518,7 +518,6 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
         \label{fig:four_men_drugs_compared_to_parametrics}
     \end{figure}
 
-	
 	
 	\subsubsection{Pacienti léčení placebem} \label{sec:non_parametric_placebo}
 	Opět SF, CDF a CHF pro podskupinu pacientů léčenou placebem.
@@ -538,6 +537,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
     \end{figure}
 	
 	Zde je počet dnů vynesen pouze do hodnoty 110, jelikož maximální hodnota \texttt{survt} pro pacienty léčené placebem je 103.
+    
+    Obrázek~\ref{fig:four_men_placebo_comp_to_parametrics} opět ukazuje shodu parametrických a neparametrických modelů.
 	
 	
 	\section{Porovnání podskupin lék vs. placebo} \label{sec:comparison_drug_vs_placebo}
@@ -551,24 +552,26 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
         \label{fig:TTTplot}
     \end{figure}
     
-    Obrázek~\ref{fig:SF_for_parametric} je ve shodě s Obrázkem~\ref{fig:TTTplot}, tedy ilustruje o něco rychlejší (ve smyslu doby do úmrtí) průběh nemoci u pacientů, kteří dostávali placebo.
+    Obrázek~\ref{fig:SF_for_parametric} (ukazující SF pro parametrické modely) je ve shodě s Obrázkem~\ref{fig:TTTplot}, tedy ilustruje o něco rychlejší (ve smyslu doby do úmrtí) průběh nemoci u pacientů, kteří dostávali placebo.
     
    	\begin{figure}[H]
         \centering
         \includegraphics[width=0.5\linewidth]{img/survival_function_drug_vs_placebo_parametric.png}
-        \caption{Průběh survival function pro vybrané parametrické modely}
+        \caption{Průběh survival function pro vybrané parametrické modely.}
         \label{fig:SF_for_parametric}
     \end{figure}
     
    	\begin{figure}[H]
         \centering
         \includegraphics[width=0.9\linewidth]{img/survival_function_drug_vs_placebo_NON_parametric.png}
-        \caption{Průběh survival function pro vybrané neparametrické modely}
+        \caption{Průběh survival function pro vybrané neparametrické modely (KM, NA)}
         \label{fig:SF_for_nonparametric}
     \end{figure}    
     
+    \textbf{Poznámka k Obrázkům~\ref{fig:SF_for_parametric}~a~\ref{fig:SF_for_nonparametric}:} na první pohled lze říct, že SF pro pacienty s placebem od 100. dne léčby, získané parametrickým a neparametrickým přístupem, se neshodují. Je to vysvětlitelné tím, že po 100. dni již nebyla žádná další pozorování úmrtí, a tedy parametrický odhad může být nekvalitní.
+    
     Na Obrázku~\ref{fig:HF_for_parametric} je průběh intenzity poruch pro dvě zvolené parametrické hustoty: lognormální o dvou parametrech (popisující podskupinu pacientů, léčených lékem) a exponenciální o jednom parametru (popisující podskupinu pacientů, léčených placebem).
-    Pacienti s placebem mají \textit{constant failure rate}. U pacientů s lékem je vidět, že pokud pacient přežije prvních 30 dnů léčby, dále riziko úmrtí bude klesat.
+    Pacienti s placebem mají \textit{constant failure rate}. U pacientů s lékem je vidět, že pokud pacient přežije prvních 30 dnů léčby, dále riziko úmrtí bude klesat. Lze tedy říct, že lék zabírá.
     
    	\begin{figure}[H]
         \centering
@@ -597,7 +600,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uveden základní analýza na ce
         \multirow{2}{*}{Placebo} & Exp1P        & 60.64  & 42.03 & 60.64 \\
         & Kaplan-Meier & 54.16  & 29    &       \\ \bottomrule
     \end{tabular}
-    \caption{MRL = střední zbytková doba života (mean resudual life), MTTF = střední doba do úmrtí (mean time to failure), $t_{\mbox{med}}$ = mediánová doba života}
+    \caption{MRL = střední zbytková doba života (\textit{mean residual life}), MTTF = střední doba do úmrtí (\textit{mean time to failure}), $t_{\mbox{med}}$ = mediánová doba života}
     \label{tab:statistics}
 \end{table}
 
