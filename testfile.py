@@ -59,8 +59,9 @@ print('\\begin{tabular}{llllllllllllllrrrrl}\n\\toprule\n & Distribution & Alpha
       '-75.54 & 155.88 & 156.86 & 6.93 & TNC \\\\\n\\bottomrule\n\\end{tabular}\n')
 
 
+logranktest = '\\begin{tabular}{lrrr}\n & test_statistic & p & -log2(p) \\\\\n0 & 1.74 & 0.19 & 2.42 \\\\\n\\end{tabular}\n'
 
-
+print(logranktest)
 
 
 

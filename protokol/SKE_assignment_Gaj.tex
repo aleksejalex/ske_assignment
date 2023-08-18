@@ -570,15 +570,15 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na c
     
     \textbf{Poznámka k Obrázkům~\ref{fig:SF_for_parametric}~a~\ref{fig:SF_for_nonparametric}:} na první pohled lze říct, že SF pro pacienty s placebem od 100. dne léčby, získané parametrickým a neparametrickým přístupem, se neshodují. Je to vysvětlitelné tím, že po 100. dni již nebyla žádná další pozorování úmrtí, a tedy parametrický odhad může být nekvalitní.
     
-    Na Obrázku~\ref{fig:HF_for_parametric} je průběh intenzity poruch pro dvě zvolené parametrické hustoty: lognormální o dvou parametrech (popisující podskupinu pacientů, léčených lékem) a exponenciální o jednom parametru (popisující podskupinu pacientů, léčených placebem).
-    Pacienti s placebem mají \textit{constant failure rate}. U pacientů s lékem je vidět, že pokud pacient přežije prvních 30 dnů léčby, dále riziko úmrtí bude klesat. Lze tedy říct, že lék zabírá.
-    
    	\begin{figure}[H]
         \centering
         \includegraphics[width=0.5\linewidth]{img/hazard_rate_drug_vs_placebo_parametric_my_choice.png}
         \caption{Průběh intenzity poruch (\textit{hazard function}) pro vybrané parametrické modely}
         \label{fig:HF_for_parametric}
     \end{figure} 
+    
+    Na Obrázku~\ref{fig:HF_for_parametric} je průběh intenzity poruch pro dvě zvolené parametrické hustoty: lognormální o dvou parametrech (popisující podskupinu pacientů, léčených lékem) a exponenciální o jednom parametru (popisující podskupinu pacientů, léčených placebem).
+    Pacienti s placebem mají \textit{constant failure rate}. U pacientů s lékem je vidět, že pokud pacient přežije prvních 30 dnů léčby, dále riziko úmrtí bude klesat. Lze tedy říct, že lék zabírá.
     
    	\begin{figure}[H]
         \centering
@@ -587,8 +587,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na c
         \label{fig:CHF_for_parametric}
     \end{figure}     
     
-    
-    Vybrané číselné charakteristiky jsou uvedeny v tabulce níže.
+    Obrázkek~\ref{fig:CHF_for_parametric} ilustruje kumulativní intezity poruch pro obě podskupiny pro různé modely. 
  
 \begin{table}[H]
     \centering
@@ -604,6 +603,8 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na c
     \label{tab:statistics}
 \end{table}
 
+    Vybrané číselné charakteristiky jsou uvedeny v Tabulce~\ref{tab:statistics}. Hodnoty MTTF pro parametrický a neparametrický přístup jsou poměrně blízké, $t_{\mbox{med}}$ v případě léku také. $t_{\mbox{med}}$ pro podskupinu, léčenou placebem se liší - vysvětlení se nabízí stejné, jako u Obrázků~\ref{fig:SF_for_parametric}~a~\ref{fig:SF_for_nonparametric} - nedostatek pozorování po 100. dni.
+    
 
 %\begin{table}%[H]
 %    \centering
@@ -620,8 +621,7 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na c
 %\end{table}
     
     
-	
-	\newpage
+	%\newpage
 	\section{Coxův regresní model} \label{sec:cox_model}
 	\textit{Coxův regresní model} je založen na Coxově proporcionálním hazardovém předpokladu, který tvrdí, že poměrné riziko dvou skupin je konstantní v čase. Tento předpoklad umožňuje odhadnout vliv různých faktorů na přežití a současně zachovává nezávislost na neovlivňujících proměnných.
 	
@@ -639,28 +639,56 @@ V Tabulce~\ref{tab:zaklad_anal_cely_dataset} je uvedena základní analýza na c
 	
 	Je vidět, že grafy nejsou \uvoz{rovnoběžné}, na několika místech se kříží. 
     Znamená to, že v tomto případě Coxův regresní model nelze použít. 
+    
+    Ověřme ještě tzv. \textit{logrank test}.
+    Testuje hypotézu $H_0: $ \texttt{obě podskupiny mají identické rizikové funkce} vs. $H_1: $ \texttt{podskupiny mají různé rizikové funkce}. Pokud $p$ hodnota testu vyjde menší než hladina významnosti $\alpha = 0.1$, hypotézu $H_0$ zamítneme. 
+    
+    % If the p-value is less than the chosen significance threshold (equivalently, if the observed test statistic is in the critical region), then we say the null hypothesis is rejected at the chosen level of significance. If the p-value is not less than the chosen significance threshold (equivalently, if the observed test statistic is outside the critical region), then the null hypothesis is not rejected.
+    
+    \begin{table}[H]
+        \centering
+    \begin{tabular}{lrrr}
+        \toprule
+        & \textbf{test\_statistic} & \textbf{p} & \textbf{-log2(p)} \\ \midrule
+        0 & 1.73812 & 0.18738 & 2.42 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Výsledek logrank testu}
+    \label{tab:logrank_test}
+    \end{table}
+    
+    Zde $p$-hodnota testu vyšla větší než hladina významnosti, tedy test hypotézu $H_0$ nezamítá (přijímá). Tedy opravdu v tomto případě Coxův test nelze použít.
+     
+    Další možný důvod, proč se Coxův model nepodařilo sestrojit, může být nedostatečný počet událostí.
 
 	%\subsection{Model}
     
-    \begin{postulate}[DO NOT leave]
-        Důvodem, proč nemohu použít Coxův proporcionální model rizik pro mou situaci, je přítomnost několika závažných problémů ve sbírce dat a vlastnostech mého datového souboru:
-        
-        1. Necenzurovaná data: Coxův model předpokládá, že data jsou cenzurována pouze zprava, což znamená, že neposkytuje adekvátní analýzu, pokud mám data cenzurována zleva nebo jsou nedostupná. Pokud je v mé datové sadě přítomnost těchto typů cenzury, mohou výsledky modelu být zkreslené a nepřesné.
-        
-        2. Nelinearita v efektech: Coxův model funguje nejlépe, pokud se předpokládá, že efekty proměnných jsou lineární v čase. Pokud mám důvody domnívat se, že efekty se mohou měnit nebo jsou nelineární, model nemusí poskytnout adekvátní odhady rizika.
-        
-        3. Interakce mezi proměnnými: Pokud existují interakce mezi proměnnými, které ovlivňují riziko, Coxův model může být problematický. Model nefunguje dobře při komplexních vztazích mezi proměnnými.
-        
-        4. Nízký počet událostí: Coxův model vyžaduje dostatečný počet událostí v porovnání s počtem proměnných, aby byl spolehlivý a stabilní. Pokud mám málo událostí ve srovnání s počtem proměnných, model může vykazovat nedostatečnou přesnost.
-        
-        5. Nezávislé pozorování: Coxův model předpokládá, že pozorování jsou nezávislá. Pokud mám v datech přítomnost korelovaných nebo shlukovaných pozorování, může to model zpochybnit.
-        
-        Vzhledem k těmto omezením je vhodné hledat alternativní modely, které lépe odpovídají charakteru mých dat a umožní spolehlivě odhadnout riziko ve zkoumaném kontextu.
-    \end{postulate}
+%    \begin{postulate}[DO NOT leave]
+%        Důvodem, proč nemohu použít Coxův proporcionální model rizik pro mou situaci, je přítomnost několika závažných problémů ve sbírce dat a vlastnostech mého datového souboru:
+%        
+%        1. Necenzurovaná data: Coxův model předpokládá, že data jsou cenzurována pouze zprava, což znamená, že neposkytuje adekvátní analýzu, pokud mám data cenzurována zleva nebo jsou nedostupná. Pokud je v mé datové sadě přítomnost těchto typů cenzury, mohou výsledky modelu být zkreslené a nepřesné.
+%        
+%        2. Nelinearita v efektech: Coxův model funguje nejlépe, pokud se předpokládá, že efekty proměnných jsou lineární v čase. Pokud mám důvody domnívat se, že efekty se mohou měnit nebo jsou nelineární, model nemusí poskytnout adekvátní odhady rizika.
+%        
+%        3. Interakce mezi proměnnými: Pokud existují interakce mezi proměnnými, které ovlivňují riziko, Coxův model může být problematický. Model nefunguje dobře při komplexních vztazích mezi proměnnými.
+%        
+%        4. Nízký počet událostí: Coxův model vyžaduje dostatečný počet událostí v porovnání s počtem proměnných, aby byl spolehlivý a stabilní. Pokud mám málo událostí ve srovnání s počtem proměnných, model může vykazovat nedostatečnou přesnost.
+%        
+%        5. Nezávislé pozorování: Coxův model předpokládá, že pozorování jsou nezávislá. Pokud mám v datech přítomnost korelovaných nebo shlukovaných pozorování, může to model zpochybnit.
+%        
+%        Vzhledem k těmto omezením je vhodné hledat alternativní modely, které lépe odpovídají charakteru mých dat a umožní spolehlivě odhadnout riziko ve zkoumaném kontextu.
+%    \end{postulate}
     
 	
-	\newpage
+	%\newpage
 	\section{Závěr}\label{sec:zaver}
-	Tato práce 
+	Cílem této práce bylo analyzovat poskytnutá data o pacientech, podstupujících léčbu jisté nemoci a zjistit, zda podávání léku mělo vliv na dobu přežití pacienta. Pacienti byly rozděleny do dvou podskupin: léčených pomocí léku a léčených pomocí placeba. 
+    
+    Prvně byla provedena základní analýza datasetu. Následně pomocí parametrických a neparametrických přístupů byly sestrojeny modely a porovnány mezi sebou. Bylo zjištěno, že se vizuálně průběhy rizikových funkcí pro obě podskupiny liší a že podskupina, dostávající skutečný lék, měla výrazně vyšší dobu dožití.
+    Coxův model se sestrojit nepodařilo, jelikož nebyly splněny jeho předpoklady.
+    
+    Na základě provedené analýzy lze tedy uzavřít, že lék vybrané skupině pacientů (typ buněk \texttt{2} - \texttt{small}) pomohl k až čtyřnásobně zvýšit dobu dožití. Nicméně pracovalo se celkem s 48 pozorováními (pacienty), a navíc podskupiny byly nerovnoměrně rozděleny - placebo dostávalo pouze 18 pacientů.
+     
+    
 
 \end{document}
